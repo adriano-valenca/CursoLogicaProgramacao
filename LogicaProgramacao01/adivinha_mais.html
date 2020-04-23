@@ -1,0 +1,89 @@
+<meta charset="utf-8">
+
+<input>
+<button>Compare com o meu segredo</button>
+
+<script>
+	
+	//gera um numero aleatoria de 0 e 10;
+	function sorteia(){
+
+		return Math.round(Math.random() * 10);
+	}
+
+	//sorteia os numeros dos segredos
+	function sorteiaNumeros(quantidade){
+
+		var segredos = [];
+
+		var numero = 1;
+
+		//executa enquanto a quantidade solicitada for menor ou igual ao numero
+		while(numero <= quantidade){
+
+			var numeroAleatorio = sorteia();
+			var achou = false;
+
+			// verifica se o numero sorteado é diferente de 0 e executa o codigo
+			if(numeroAleatorio !== 0){
+
+				for(var posicao = 0; posicao < segredos.length; posicao++){
+
+					// verifica se o numero é repetido
+					if(segredos[posicao] == numeroAleatorio){
+						achou = true;
+						break;
+					}
+				}
+
+				// adiciona o numero aleatoria na array, ja que é diferente de 0 e não é repetido.
+				if(achou == false){
+					segredos.push(numeroAleatorio);
+					numero++;
+				}
+			}
+		}
+
+		// retorna a array sem numero 0 e repetidos.
+		return segredos; 
+	}
+
+	var segredos = sorteiaNumeros(3);
+	
+	// ver os numeros no console
+	console.log(segredos);
+
+	// pega o valor da tag input do html
+	var input = document.querySelector("input");
+	input.focus();
+	
+	//verufica se você acertou o numero sorteado
+	function verifica(){
+		
+		var achou = false;
+
+		for(var posicao = 0; posicao < segredos.length; posicao++){
+
+			if(input.value == segredos[posicao]){
+			
+				alert("Você Acertou!");
+				achou = true;
+				break;
+			}
+		}
+
+		if(achou == false){
+
+			alert("Você Errou!");
+		}
+		
+		//limpa a caixa de texto e coloca o foco nela
+		input.value = "";
+		input.focus();
+	}
+	
+	// executa a funcao inserida no botao ao ser clicado.
+	var button = document.querySelector("button");
+	button.onclick = verifica; // se colocar os () a função sera executada automativamente.
+
+</script>
