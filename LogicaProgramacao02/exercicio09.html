@@ -1,0 +1,54 @@
+<canvas width="600" height="400"></canvas>
+<br>
+Escolha um cor <input type="color">
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    // variavel que recebe o valor da tag
+    var paleta = document.querySelector('input');
+    
+    pincel.fillStyle = 'grey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    //variavel global
+    var desenha = false;
+
+    
+    function habilitaDesenhar(){
+        desenha = true;
+
+    }
+
+    function desabilitaDesenhar(){
+        desenha = false;
+    }
+
+    function desenhaCirculo(evento){
+
+        if(desenha){
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+            //recebe o valor da cor da variavel paleta
+            pincel.fillStyle = paleta.value;
+            pincel.beginPath();
+            pincel.arc(x, y, 10, 0, 2 * 3.14);
+            pincel.fill();
+            console.log(x + ' , ' + y);
+        }
+        
+    }
+
+    //evento do click esquerdo do mouse
+    tela.onmousedown = habilitaDesenhar;
+
+    //evento de soltar o click esquerdo do mouse
+    tela.onmouseup = desabilitaDesenhar;
+
+    //evento de mover o mouse
+    tela.onmousemove = desenhaCirculo;
+   
+
+
+</script>
