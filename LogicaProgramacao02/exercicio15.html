@@ -31,7 +31,15 @@
         var x = evento.pageX - tela.offsetLeft;
         var y = evento.pageY - tela.offsetTop;
 
-        if(desenha) {
+        if(x <= 50 && y <= 50) {
+            corAtual = 'red';
+        } else if (x > 50 && x <= 100 && y <= 50) {
+            corAtual = 'green';
+        } else if (x > 100 && x <= 150 && y <= 50) {
+            corAtual = 'blue';
+        }
+
+        if(desenha && y > 50) {
 
             desenhaCirculo(x, y, 5, corAtual);
         }
@@ -46,17 +54,7 @@
 
         desenha = false;
     }
-
-    function escolheCor(cor) {
-        
-        var x = evento.pageX - tela.offsetLeft;
-        var y = evento.pageY - tela.offsetTop;
-
-        if(x <= 50 && y <= tamanhoQuadrados) {
-            
-        }
-    }
-
+    
     var tela = document.querySelector('canvas');
     var pincel = tela.getContext('2d');
     pincel.fillStyle = 'lightgray';
@@ -73,8 +71,6 @@
     desenhaPaletaDeCores(); // mostra os quadrados de seleção de cores
 
     tela.onmousemove = lidaComMovimentoDoMouse;
-
-    tela.onmousedown = escolheCor;
 
     tela.onmousedown = habilitaDesenhar;
 
